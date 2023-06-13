@@ -1,15 +1,21 @@
 package app
 
 import (
-	"fmt"
-
 	"github.com/bwmarrin/discordgo"
 )
 
-func discordBot() {
-	dg, err := discordgo.New("Bot TOKEN HERE")
+func discordBot() (string, error) {
+	dg, err := discordgo.New("MTExODI2NDMyNjc4MDg5MTIzNw.GJEZGy.gmujkycrlutDVb7l36NkHWkNg4-wuTnk1aUoQ8")
 	if err != nil {
-		fmt.Println("Error creating Discord session:", err)
-		return
+		return "", err
 	}
+
+	dg.AddHandler(messageCreate)
+
+	err = dg.Open()
+	if err != nil {
+		return "", err
+	}
+
+	return "", nil
 }
