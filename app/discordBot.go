@@ -5,7 +5,7 @@ import (
 )
 
 func discordBot() (string, error) {
-	dg, err := discordgo.New("MTExODI2NDMyNjc4MDg5MTIzNw.GJEZGy.gmujkycrlutDVb7l36NkHWkNg4-wuTnk1aUoQ8")
+	dg, err := discordgo.New("")
 	if err != nil {
 		return "", err
 	}
