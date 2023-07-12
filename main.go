@@ -1,5 +1,14 @@
 package main
 
+import (
+	"fmt"
+	"theGremlin/app"
+)
+
 func main() {
-	// initDB() - run this when you need to generate the DB
+	err := app.BotRunner()
+	if err != nil {
+		fmt.Println("Error occured: %w", err)
+		return
+	}
 }
