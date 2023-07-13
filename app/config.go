@@ -2,28 +2,30 @@ package app
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
-func loadConfig() (*Config, error) {
-	filename, err := filepath.Abs("config.json")
-	if err != nil {
-		return nil, err
-	}
-
-	file, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return nil, err
-
-	}
-	var config Config
-	err = json.Unmarshal(file, &config)
-	return &config, nil
+type JSONConfig struct {
+	BotToken string `json:"botToken"`
+	ApiUrl   string `json:"apiUrl"`
+	ApiPort  int    `json:"apiPort"`
 }
 
-type Config struct {
-	BotToken string `json:"botToken"`
-	ApiURL   string `json:"apiUrl`
-	ApiPort  string `json:"apiPort"`
+func (j *JSONConfig) LoadConfig() error {
+	filename, err := filepath.Abs("config.json")
+	if err != nil {
+		return err
+	}
+
+	file, err := os.ReadFile(filename)
+	if err != nil {
+		return err
+
+	}
+	err = json.Unmarshal(file, j)
+	if err != nil {
+		return err
+	}
+	return nil
 }

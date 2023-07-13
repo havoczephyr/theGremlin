@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	err := app.BotRunner()
 	if err != nil {
 		fmt.Println("Error occured: %w", err)
