@@ -2,6 +2,7 @@ package app
 
 import (
 	"strings"
+	"theGremlin/logic"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -12,6 +13,11 @@ func botHandler(s *discordgo.Session, m *discordgo.MessageCreate, config JSONCon
 	}
 	parts := strings.Fields(m.Content[len("!theGremlin"):])
 	command := parts[0]
+	authorName := m.Author.Username
+
+	port := config.ApiPort
+	url := config.ApiUrl
+	token := config.BotToken
 
 	switch command {
 	case "curateAllPending":
@@ -30,13 +36,13 @@ func botHandler(s *discordgo.Session, m *discordgo.MessageCreate, config JSONCon
 			return
 		}
 	}
-	// arguments := strings.Join(parts[1:], " ")
+	arguments := strings.Join(parts[1:], " ")
 
 	switch command {
 	case "denyPost":
 		// add me!
 	case "suggest":
-		// add me!
+		logic.Suggest(arguments, authorName, url, token, port)
 	case "createPriority":
 		// add me!
 	}
